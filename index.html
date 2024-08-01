@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Amira ChatBot - Zodiaco</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a2e;
+            color: #eaeaea;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: url('/background-stars.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .chat-container {
+            width: 80%;
+            max-width: 800px;
+            background-color: rgba(32, 32, 64, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        .chat-box {
+            width: 100%;
+            height: 400px;
+            overflow-y: auto;
+            background-color: #161625;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: #eaeaea;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .user {
+            align-self: flex-end;
+            background-color: #3a3a5c;
+        }
+        .bot {
+            align-self: flex-start;
+            background-color: #2b2b4a;
+        }
+        form {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-right: 10px;
+            font-size: 16px;
+            background-color: #2b2b4a;
+            color: #eaeaea;
+        }
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #3a3a5c;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5a5a8c;
+        }
+        h1 {
+            color: #eaeaea;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Amira ChatBot</h1>
+        <div class="chat-box" id="chat-box">
+            {% for speaker, message in chat_history %}
+                <div class="message {{ 'user' if speaker == 'Usuario' else 'bot' }}"><strong>{{ speaker }}:</strong> {{ message }}</div>
+            {% endfor %}
+        </div>
+        <form method="POST" action="/">
+            <input type="text" name="user_input" placeholder="Escribe tu mensaje..." required>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script>
+        // Desplazarse automáticamente al final de la conversación
+        var chatBox = document.getElementById('chat-box');
+        chatBox.scrollTop = chatBox.scrollHeight;
+    </script>
+</body>
+</html>
